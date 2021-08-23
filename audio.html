@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+  <h2>Sound Hearing Test with WebAudio</h2>
+  <button id="start_button" onclick="startSound(10000)">10,000Hz</button>
+  <button id="start_button" onclick="startSound(11000)">11,000Hz</button>
+  <button id="start_button" onclick="startSound(12000)">12,000Hz</button>
+  <button id="start_button" onclick="startSound(13000)">13,000Hz</button>
+  <button id="start_button" onclick="startSound(14000)">14,000Hz</button>
+  <button id="start_button" onclick="startSound(15000)">15,000Hz</button>
+  <button id="start_button" onclick="startSound(16000)">16,000Hz</button>
+  <button id="start_button" onclick="startSound(17000)">17,000Hz</button>
+  <button id="start_button" onclick="startSound(18000)">18,000Hz</button>
+  <button id="start_button" onclick="startSound(19000)">19,000Hz</button>
+  <button id="start_button" onclick="startSound(20000)">20,000Hz</button>
+  <br />
+  <button id="stop_button" onclick="stopSound()">stop</button>
+
+</body>
+<script>
+  let ctx = null;
+  let osc = null;
+
+  function startSound(freq) {
+    if (!ctx) {
+      ctx = new AudioContext();
+      console.log("Max Hz=", ctx.sampleRate / 2)
+    }
+
+    if (osc) {
+      stopSound();
+    }
+
+    osc = ctx.createOscillator()
+    osc.frequency.value = freq
+    osc.connect(ctx.destination)
+    osc.start()
+  }
+
+  function stopSound() {
+    if (osc) {
+      osc.stop();
+      osc.disconnect()
+      osc = null
+    }
+  }
+
+</script>
+
+</html>
