@@ -17,12 +17,14 @@
   <br />
   <button id="stop_button" onclick="stopSound()">stop</button>
   <br />
-  <span id="message_area"></span>
+  <span id="message_area"></span><br />
+  <span id="message_area_2"></span><br />
   <br />
   GitHub <a href="https://github.com/mganeko/sound_check">https://github.com/mganeko/sound_check</a>
 </body>
 <script>
   const messageArea = document.getElementById('message_area')
+  const messageArea2 = document.getElementById('message_area_2')
   let ctx = null;
   let osc = null;
 
@@ -31,7 +33,7 @@
       ctx = new AudioContext();
       console.log("Max Hz=", ctx.sampleRate / 2)
       const str = "AudioContex Started. Max Freq.=" + ctx.sampleRate / 2;
-      showMessage(str);
+      showAditionalMessage(str);
     }
 
     if (osc) {
@@ -42,6 +44,8 @@
     osc.frequency.value = freq
     osc.connect(ctx.destination)
     osc.start()
+
+    showMessage("playing " + freq + " Hz");
   }
 
   function stopSound() {
@@ -50,10 +54,16 @@
       osc.disconnect()
       osc = null
     }
+
+    showMessage("sound stop");
   }
 
   function showMessage(str) {
     messageArea.innerText = str;
+  }
+
+  function showAditionalMessage(str) {
+    messageArea2.innerText = str;
   }
 
 </script>
