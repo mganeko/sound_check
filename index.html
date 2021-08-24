@@ -16,12 +16,13 @@
   <button onclick="startSound(20000)">20,000Hz</button>
   <br />
   <button id="stop_button" onclick="stopSound()">stop</button>
-
   <br />
+  <span id="message_area"></span>
   <br />
   GitHub <a href="https://github.com/mganeko/sound_check">https://github.com/mganeko/sound_check</a>
 </body>
 <script>
+  const messageArea = document.getElementById('message_area')
   let ctx = null;
   let osc = null;
 
@@ -29,6 +30,8 @@
     if (!ctx) {
       ctx = new AudioContext();
       console.log("Max Hz=", ctx.sampleRate / 2)
+      const str = "AudioContex Start. SamplingRate=" + ctx.sampleRate / 2;
+      showMessage(str);
     }
 
     if (osc) {
@@ -47,6 +50,10 @@
       osc.disconnect()
       osc = null
     }
+  }
+
+  function showMessage(str) {
+    messageArea.innerText = str;
   }
 
 </script>
